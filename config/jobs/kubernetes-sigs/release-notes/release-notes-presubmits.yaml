@@ -85,9 +85,14 @@ presubmits:
       spec:
         containers:
           - image: node:11
+            env:
+              - name: CODECOV_TOKEN
+                value: TBD
             command:
               - /bin/bash
               - -c
               - >
                 npm ci &&
-                npm run test
+                npm install -g codecov &&
+                npm run test &&
+                codecov
